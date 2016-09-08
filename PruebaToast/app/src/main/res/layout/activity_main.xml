@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prueba de uso del Acelerometro"
+        android:id="@+id/textView" />
+    <TextView
+        android:id="@+id/active"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Status" />
+    <TextView
+        android:id="@+id/latitud"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="latitud" />
+    <TextView
+        android:id="@+id/longitud"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="longitud" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="actualizar"
+        android:id="@+id/actualizar"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>
