@@ -50,6 +50,7 @@
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
         android:textColor="#FFFFFF"
+        android:layout_marginTop="8dp"
         android:textSize="17dp"/>
 
     <Button
@@ -64,7 +65,8 @@
         android:paddingRight="30dp"
         android:paddingLeft="30dp"
         android:textColor="#FFFFFF"
-        android:textSize="17dp"/>
+        android:textSize="17dp"
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -75,9 +77,9 @@
         android:textStyle="bold"
         android:textColor="#FFFFFF"
         android:textAlignment="center"
-        android:layout_below="@+id/buttonDetectar"
+        android:layout_below="@+id/buttonCheck"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="52dp" />
+        android:layout_marginTop="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -131,4 +133,27 @@
         android:layout_below="@+id/textPosAc"
         android:layout_alignEnd="@+id/textPosAc" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Revisar Posición"
+        android:id="@+id/buttonCheck"
+        android:layout_below="@+id/buttonDetectar"
+        android:layout_centerHorizontal="true"
+        android:background="#1c1c1c"
+        android:paddingRight="30dp"
+        android:paddingLeft="30dp"
+        android:textColor="#FFFFFF"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/textViewDentroFuera"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#FFFFFF"
+        android:padding="5dp"/>
 </RelativeLayout>

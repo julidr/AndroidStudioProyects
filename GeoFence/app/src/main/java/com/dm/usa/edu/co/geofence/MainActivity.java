@@ -3,13 +3,13 @@ package com.dm.usa.edu.co.geofence;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button buttonDetectar;
     Button buttonRadio;
+    Button buttonCheck;
     TextView textFijo;
     TextView textUbicacion;
     EditText editTextRadio;
@@ -30,11 +31,14 @@ public class MainActivity extends AppCompatActivity {
     TextView textPosiAct;
     TextView textGuardado;
     TextView textActual;
+    TextView textDentroFuera;
 
     float radio = 0;
+    float distancia=0;
 
     private boolean cambiarGuardada = true;
     private Location guardada;
+    private Location actual;
 
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -57,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
         textPosiGuar = (TextView) findViewById(R.id.textPosiGuardada); //Son los textos Fijos como los titulos
         textGuardado = (TextView) findViewById(R.id.textGuardada); //Son los textos variables
         textActual = (TextView) findViewById(R.id.textActual); //Son los textos variables
+        buttonCheck= (Button) findViewById(R.id.buttonCheck);
+        textDentroFuera= (TextView) findViewById(R.id.textViewDentroFuera);
 
         //ASIGNACION DE RADIO-----------------------------------------------------------------------
 
@@ -73,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //------------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------
 
         locationManager = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -90,17 +96,18 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "mensaje: guardada la locacion--->");
                     mensajeToast("Posicion Guardada");
                 }else{
+                    actual=location;
                     mensajeToast("Posicion Actual actualizada");
                 }
 
-                float distancia = guardada.distanceTo(location);
+                distancia = guardada.distanceTo(location);
                 Log.d(TAG, "mensaje: Distancia: "+distancia+"m");
                 textUbicacion.setText(distancia+" m");
 
                 if(radio>0){
                     if(distancia>radio){
                         Log.d(TAG, "Distancia > que el radio");
-                        mensajeToast("Se paso la cerca");
+                        //mensajeToast("Se paso la cerca");
                     }
                 }
 
@@ -127,6 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d(TAG, "mensaje: empieza configurebutton");
         configureButton();
+        checkPosition();
     }
 
     @Override
@@ -143,6 +151,8 @@ public class MainActivity extends AppCompatActivity {
     private void configureButton() {
         Log.d(TAG, "mensaje: entre conf buton");
 
+
+        //DETECCIÓN DE DISTANCIA-----------------------------------------------------------------------
         buttonDetectar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +191,26 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        //------------------------------------------------------------------------------------------
+
+    }
+
+    public void checkPosition(){
+        //REVISAR POSICIÓN-----------------------------------------------------------------------
+        buttonCheck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(distancia>radio){
+                    textDentroFuera.setText("Se Encuentra Fuera de la Cerca");
+                    textDentroFuera.setBackgroundColor(Color.parseColor("#B20000"));
+                }
+                else{
+                    textDentroFuera.setText("Se Encuentra Dentro de la Cerca");
+                    textDentroFuera.setBackgroundColor(Color.parseColor("#183A05"));
+                }
+            }
+        });
+        //------------------------------------------------------------------------------------------
     }
 
     public void mensajeToast(String ms){
